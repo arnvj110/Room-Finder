@@ -1,4 +1,4 @@
-import { Home, LogOut, User } from 'lucide-react'
+import { Home, LogIn, LogOut, User } from 'lucide-react'
 import React from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
@@ -40,7 +40,10 @@ const Header = ({view, setView}) => {
                 Find Rooms
               </button>
               <button
-                onClick={() => setView('owner')}
+                onClick={() => {
+                    if (!user) toast.error("You need to LogIn first");
+                    else setView('owner');
+                }}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   view === 'owner'
                     ? 'bg-indigo-600 text-white'
@@ -51,7 +54,7 @@ const Header = ({view, setView}) => {
               </button>
 
               {/* User Info & Logout */}
-              {user && (
+              {user ? (
                 <div className="flex items-center gap-2 ml-2 pl-2 border-l border-[#3f3f3f]">
                   <div className="flex items-center gap-2 px-3 py-2 bg-[#2f2f2f] rounded-lg border border-[#3f3f3f]">
                     <User className="w-4 h-4 text-indigo-400" />
@@ -66,8 +69,20 @@ const Header = ({view, setView}) => {
                     <LogOut className="w-4 h-4" />
                     Logout
                   </button>
+                  
                 </div>
-              )}
+              ) : <div className="flex items-center gap-2 ml-2 pl-2 border-l border-[#3f3f3f]">
+                  
+                  <button
+                    onClick={() => {navigate("/login")}}
+                    className="px-4 py-2 bg-blue-600 bg-opacity-20 hover:bg-opacity-30 text-blue-100 rounded-lg font-medium transition-all border border-blue-600 border-opacity-30 flex items-center gap-2 cursor-pointer"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    LogIn
+                  </button>
+                  
+                </div>}
+
             </div>
           </div>
         </div>
