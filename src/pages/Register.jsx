@@ -15,7 +15,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  console.log(user);
+  
 
 
   const handleSubmit = async (e) => {
