@@ -1,16 +1,65 @@
-# React + Vite
+# 🏠 Room Finder Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Room Finder web application that allows users to **sign up, verify email via OTP, and manage their own room listings securely**.  
+Built using **React** for the frontend and **Supabase** as the backend (Authentication, Database, Storage).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Project
+- **Live App:** _https://roomfinder1.netlify.app_
+- **Demo Video:** _https://www.loom.com/share/cb48afe8a0a84c6987a4b1df9321d36f_
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+### 🔐 Authentication
+- Email & password signup
+- **OTP-based email verification** (no magic links)
+- Password-based login
+- Secure authentication using Supabase Auth
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🏘️ Room Listings
+- Each user can:
+  - Add room listings
+  - View **only their own rooms**
+  - Delete their rooms
+- User data isolation using **Row Level Security (RLS)**
+
+### 🖼️ Image Upload
+- Room images stored using **Supabase Storage**
+- Public image URLs for fast loading
+
+### 🎨 UI / UX
+- Dark mode (carbon theme)
+- Responsive design
+- Clean and modern layout
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Tailwind CSS
+- **Backend as a Service:** Supabase
+- **Authentication:** Supabase Auth (Email)
+- **Database:** PostgreSQL (Supabase)
+- **Storage:** Supabase Storage
+
+---
+
+## 🗂️ Database Schema (Rooms)
+
+```sql
+rooms
+├── id (uuid)
+├── owner_id (uuid → auth.users.id)
+├── title (text)
+├── location (text)
+├── price (integer)
+├── property_type (text)
+├── tenant_preference (text)
+├── contact (text)
+├── description (text)
+├── images (text[])
+├── created_at (timestamp)
+├── updated_at (timestamp)
